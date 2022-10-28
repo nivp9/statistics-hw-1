@@ -25,6 +25,36 @@ b = pd.cut(df['Age'], bins=bins, labels=labels, include_lowest=True)
 x = df.groupby(['Sex', 'Pathology', b]).size().unstack(fill_value=0).stack().reset_index(name='count')
 print(x)
 
+
 # ind = np.digitize(df['Age'], bins)
+
+# endregion
+
+# region bonus
+
+def Empirical_F(x):
+    l = len(x)
+    x.sort()
+    return x, [(lastIndexOf(x, x[i]) + 1) * (1 / l) for i in range(l)]
+
+
+def lastIndexOf(arr, val):
+    for i in range(len(arr)):
+        if arr[len(arr) - (i + 1)] == val:
+            return len(arr) - (i + 1)
+    return -1
+
+
+women_ages = list(df[df['Sex'] == 'Female']['Age'])
+men_ages = list(df[df['Sex'] == 'Male']['Age'])
+x_women, y_women = Empirical_F(women_ages)
+x_men, y_men = Empirical_F(men_ages)
+plt.plot(x_women, y_women, label='Women')
+plt.plot(x_men, y_men, label='Men')
+plt.xlabel('Age')
+plt.ylabel('Empirical distribution')
+plt.title('Empirical distribution of the age of appendicitis patients')
+plt.legend()
+plt.show()
 
 # endregion
