@@ -40,12 +40,7 @@ xVector = [item.item(0) for item in empiricalFRes]
 xVector.append(5)
 yVector = [item.item(1) for item in empiricalFRes]
 yVector.append(1)
-
-print(xVector)
-print(yVector)
 plt.step(xVector, yVector, where='post')
-# plt.show()
-
 # endregion
 # region 2.e
 y = [0, 1, 2, 3, 4, 5]
